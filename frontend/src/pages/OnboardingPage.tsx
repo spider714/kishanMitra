@@ -98,8 +98,8 @@ export default function OnboardingPage() {
         <div className="inline-flex items-center justify-center w-16 h-16 bg-emerald-100 border border-emerald-300 text-emerald-700 rounded-full mb-3 shadow-sm">
           <Sprout className="w-9 h-9" />
         </div>
-        <h1 className="text-2xl font-bold text-slate-800">KisanPolicy AI</h1>
-        <p className="text-sm text-primary font-semibold">किसान नीति एवं सब्सिडी पोर्टल</p>
+        <h1 className="text-2xl font-bold text-slate-800">Kisanमित्र</h1>
+        <p className="text-sm text-primary font-semibold">किसान मित्र</p>
       </div>
 
       {/* Login Card */}

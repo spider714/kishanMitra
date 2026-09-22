@@ -15,15 +15,16 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Configure NVIDIA Client via OpenAI SDK
-api_key = os.getenv("GEMINI_API_KEY") # They passed it or we use hardcoded
-if not api_key or "nvapi" not in api_key:
-    # Use the key the user provided directly if not in env
-    api_key = "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"
+api_key = os.getenv("NVIDIA_API_KEY") or os.getenv("GEMINI_API_KEY")
 
-client = OpenAI(
-  base_url="https://integrate.api.nvidia.com/v1",
-  api_key=api_key
-)
+if api_key:
+    client = OpenAI(
+      base_url="https://integrate.api.nvidia.com/v1",
+      api_key=api_key
+    )
+else:
+    client = None
+    print("[WARNING] Neither NVIDIA_API_KEY nor GEMINI_API_KEY found in environment. Running in Demo Mode.")
 
 MODEL_NAME = "meta/llama-3.2-11b-vision-instruct"
 VISION_MODEL_NAME = "meta/llama-3.2-11b-vision-instruct"

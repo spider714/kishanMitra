@@ -1,0 +1,44 @@
+# ==========================================
+# Kisanमित्र Root .gitignore
+# ==========================================
+
+# Environment variables & Secrets
+.env
+.env.local
+.env.*.local
+*.env
+
+# Python & Virtual Environments
+backend/venv/
+backend/.venv/
+backend/__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+
+# Node.js & Dependencies
+node_modules/
+frontend/node_modules/
+frontend/dist/
+frontend/dist-ssr/
+package-lock.json
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# OS & IDE Files
+.DS_Store
+Thumbs.db
+.vscode/
+!.vscode/extensions.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Vercel / Deployment artifacts
+.vercel
