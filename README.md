@@ -1,5 +1,7 @@
 # Kisanमित्र (KisanMitr) 🌾
 
+[![Live Demo](https://img.shields.io/badge/🌐_Live_Website-kishan--mitra--sigma.vercel.app-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://kishan-mitra-sigma.vercel.app/)
+
 [![Smart India Hackathon 2026](https://img.shields.io/badge/SIH-2026-brightgreen.svg)](https://sih.gov.in/)
 [![FastAPI](https://img.shields.io/badge/Backend-FastAPI-009688.svg?style=flat&logo=fastapi)](https://fastapi.tiangolo.com/)
 [![React](https://img.shields.io/badge/Frontend-React%2018-61DAFB.svg?style=flat&logo=react)](https://react.dev/)
@@ -8,6 +10,8 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 > **AI-Powered Agricultural Policy, Subsidy Matching, and Fraud Protection Companion for Indian Farmers.**
+
+👉 **🌐 Visit Live Web Application**: **[https://kishan-mitra-sigma.vercel.app/](https://kishan-mitra-sigma.vercel.app/)**
 
 ---
 
