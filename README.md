@@ -1,77 +1,245 @@
 # Kisanमित्र (KisanMitr) 🌾
 
-**Smart India Hackathon (SIH) 2026**
+[![Smart India Hackathon 2026](https://img.shields.io/badge/SIH-2026-brightgreen.svg)](https://sih.gov.in/)
+[![FastAPI](https://img.shields.io/badge/Backend-FastAPI-009688.svg?style=flat&logo=fastapi)](https://fastapi.tiangolo.com/)
+[![React](https://img.shields.io/badge/Frontend-React%2018-61DAFB.svg?style=flat&logo=react)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/Language-TypeScript-3178C6.svg?style=flat&logo=typescript)](https://www.typescriptlang.org/)
+[![NVIDIA NIM](https://img.shields.io/badge/AI-NVIDIA%20Llama%203.2%20Vision-76B900.svg?style=flat&logo=nvidia)](https://build.nvidia.com/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-Kisanमित्र is a next-generation, AI-powered agricultural policy and subsidy portal designed specifically for Indian farmers. It simplifies the complex world of government schemes, offering personalized scheme matching, real-time voice assistance, and AI-driven fraud protection.
+> **AI-Powered Agricultural Policy, Subsidy Matching, and Fraud Protection Companion for Indian Farmers.**
+
+---
+
+## 📌 Problem Statement & Solution
+
+Millions of farmers in India miss out on government schemes, agricultural subsidies, and financial benefits due to:
+1. **Complex documentation and bureaucratic jargon**
+2. **Language and literacy barriers**
+3. **Lack of personalized eligibility awareness**
+4. **Surging agricultural scams and fee-fraud targeting rural citizens**
+
+**Kisanमित्र (KisanMitr)** bridges this critical gap. It is a next-generation digital companion that leverages **Multimodal LLMs (NVIDIA Llama 3.2 Vision)**, **voice-first interaction**, and **real-time scheme matching** to empower every farmer to discover, understand, and claim their rightful benefits safely.
 
 ---
 
 ## 🌟 Key Features
 
-### 1. 🎙️ AI Voice & Chat Assistant (Multilingual)
-- Conversational AI assistant that understands both **Hindi** and **English**.
-- Powered by LLMs to answer questions about farming, subsidies, and crop advisories.
-- **Voice-to-Text** capabilities allow farmers to speak naturally instead of typing.
-- Real-time **Streaming Responses** with a WhatsApp-style typing indicator for a natural chat experience.
+### 1. 🎙️ Multilingual Voice & AI Chat Assistant
+- **Conversational Guidance**: Speaks and understands **Hindi (Devanagari)**, **Hinglish**, and **English**.
+- **Voice-First Input**: Built-in voice-to-text recognition allows farmers to ask queries naturally without typing.
+- **Streaming Responses**: Server-Sent Events (SSE) deliver real-time token streaming with smooth typing indicators.
+- **Agriculture Expert System**: Trained prompt context covering crop advisories, soil health, fertilizer guidelines, and central/state government schemes (including Chhattisgarh's Krishi Vibhag).
 
-### 2. 📄 Smart Document → Scheme Matcher
-- Upload documents like **Aadhaar, Land Records (Bhu-naksha), or Income Certificates**.
-- Uses **NVIDIA Vision AI** to visually extract key data (e.g., land size, income).
-- Automatically cross-references extracted data with a database of 12+ government schemes.
-- Provides a personalized list of eligible schemes with detailed AI reasoning.
+### 2. 📄 Vision-Based Smart Document Scheme Matcher
+- **Multimodal AI OCR**: Farmers can upload photos/scans of **Aadhaar cards, Land Records (Bhu-naksha/Khasra), or Income Certificates**.
+- **Automatic Data Extraction**: Uses **NVIDIA Llama 3.2 Vision** to extract land holdings, income tiers, and demographic categories.
+- **Intelligent Scheme Matching**: Cross-references extracted farmer profile data with a database of 12+ government schemes (e.g., PM-KISAN, PMFBY, KCC, PM Krishi Sinchayee Yojana).
+- **Clear Reasoning**: Explains *why* the farmer qualifies for each scheme in simple language.
 
 ### 3. 🛡️ AI Fraud Shield
-- Protects farmers from malicious scams (e.g., fake PM-KISAN fee requests, OTP scams).
-- Paste suspicious SMS texts or upload screenshots of WhatsApp messages.
-- AI instantly analyzes the text/image and flags the risk level (High/Medium/Low) with clear safety advice.
+- **Scam Detection**: Protects farmers from fraud (e.g., fake PM-KISAN fee demands, registration scams, OTP traps).
+- **Multimodal Analysis**: Accepts both text messages (SMS/WhatsApp) and screenshots of suspicious chats/notices.
+- **Risk Rating**: Returns instant risk levels (**High / Medium / Low**), key warning red flags, and safety guidelines.
+- **Hybrid Guardrails**: Combines AI Vision/LLM analysis with heuristic pattern fallback.
 
-### 4. 🌍 Seamless Bilingual Experience
-- Global context architecture allows instantaneous switching between **Hindi** and **English** across the entire app.
-- Persists user preferences locally.
+### 4. 🌾 Scheme Directory & Eligibility Calculator
+- **Central & State Coverage**: Detailed breakdown of active subsidies and support programs.
+- **Filter & Search**: Easily filter schemes by land size, category (General/OBC/SC/ST), or state.
+- **Step-by-step Guides**: Provides required documents, CSC center location guidance, and online registration steps.
+
+### 5. 🌐 Seamless Bilingual Experience
+- **Instant Language Toggle**: Effortlessly switch between Hindi and English across the entire interface.
+- **Local Persistence**: Remembers farmer details, onboarding preferences, and language selection.
+
+---
+
+## 🏗️ System Architecture
+
+```mermaid
+flowchart TD
+    subgraph Client ["Frontend (React + Vite + Tailwind)"]
+        UI[User Interface / Mobile Web]
+        Voice[Voice & Text Input]
+        DocUpload[Document / Screenshot Scanner]
+    end
+
+    subgraph Backend ["Backend API (FastAPI + Python)"]
+        API[FastAPI Server]
+        SchemeDB[(Schemes Dataset - schemes.json)]
+        Heuristic[Heuristic Fraud Engine]
+    end
+
+    subgraph External ["AI Services (NVIDIA NIM)"]
+        LLM[NVIDIA Llama 3.2 11B Vision-Instruct]
+    end
+
+    UI -->|REST / SSE Streaming| API
+    Voice -->|Chat Request| API
+    DocUpload -->|Multipart File Upload| API
+
+    API -->|Prompt & Base64 Image| LLM
+    LLM -->|Streamed / Structured JSON Response| API
+    API -->|Match Criteria| SchemeDB
+    API -->|Fallback Rules| Heuristic
+    API -->|JSON / SSE Stream| UI
+```
 
 ---
 
 ## 🛠️ Tech Stack
 
 ### Frontend
-- **React.js** (Vite)
-- **TypeScript**
-- **Tailwind CSS** (for responsive, modern UI)
-- **Lucide React** (Icons)
-- **React Router** (Navigation)
+- **Framework**: React 18 + Vite
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS
+- **Icons**: Lucide React
+- **Routing**: React Router v6
 
 ### Backend
-- **FastAPI** (Python)
-- **NVIDIA Llama 3.2 Vision-Instruct** (LLM & Vision API)
-- **Uvicorn** (ASGI server)
+- **Framework**: FastAPI (Python 3.10+)
+- **ASGI Server**: Uvicorn
+- **AI Integration**: OpenAI Python SDK configured for NVIDIA NIM Endpoint (`https://integrate.api.nvidia.com/v1`)
+- **AI Model**: `meta/llama-3.2-11b-vision-instruct`
+- **OCR Fallback**: PyTesseract & Pillow
 
 ---
 
-## 🚀 Local Setup & Installation
+## 📂 Project Structure
+
+```
+kisanmitr/
+├── backend/
+│   ├── .env.example          # Template for backend environment variables
+│   ├── .gitignore             # Backend-specific ignore rules
+│   ├── main.py               # FastAPI application entry point & AI endpoints
+│   ├── requirements.txt      # Python dependencies
+│   └── schemes.json          # Government schemes database dataset
+├── frontend/
+│   ├── public/               # Static assets & icons
+│   ├── src/
+│   │   ├── components/       # Reusable UI components & layouts
+│   │   ├── contexts/         # Language & global state management
+│   │   ├── pages/            # App pages (Home, Schemes, Fraud, Document Scanner, Profile)
+│   │   ├── types/            # TypeScript data interfaces
+│   │   ├── App.tsx           # Application route setup
+│   │   └── main.tsx          # React entry point
+│   ├── .env.example          # Frontend environment variables template
+│   ├── package.json          # Frontend dependencies & scripts
+│   ├── tsconfig.json         # TypeScript configuration
+│   └── vite.config.ts        # Vite build & proxy configuration
+├── .env.example              # Root environment template
+├── .gitignore                # Root Git ignore rules
+├── package.json              # Monorepo build script
+├── README.md                 # Project documentation
+└── vercel.json               # Monorepo Vercel deployment configuration
+```
+
+---
+
+## 🚀 Quick Start & How to Run
+
+Follow these simple steps to run both the **Backend** and **Frontend** locally.
 
 ### Prerequisites
-- Node.js (v18+)
-- Python (3.10+)
+- **Node.js** (v18+)
+- **Python** (3.10+)
+- **NVIDIA NIM API Key** (Get free key at [build.nvidia.com](https://build.nvidia.com/))
 
-### 1. Backend Setup
-```bash
+---
+
+### 🟢 Step 1: Start the Backend (FastAPI)
+
+Open Terminal 1:
+
+**On Windows (Command Prompt / PowerShell):**
+```cmd
 cd backend
 python -m venv venv
-source venv/bin/activate  # On Windows: .\venv\Scripts\activate
+.\venv\Scripts\activate
 pip install -r requirements.txt
 python main.py
 ```
-*The backend will run on `http://localhost:8000`*
 
-### 2. Frontend Setup
+**On macOS / Linux:**
+```bash
+cd backend
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+python main.py
+```
+
+> 📍 **Backend Server Running At**: `http://localhost:8000`  
+> 📑 **Interactive API Docs (Swagger)**: `http://localhost:8000/docs`
+
+---
+
+### 🔵 Step 2: Start the Frontend (React + Vite)
+
+Open a **new terminal window (Terminal 2)**:
+
 ```bash
 cd frontend
 npm install
 npm run dev
 ```
-*The frontend will run on `http://localhost:5173`*
+
+> 📍 **Frontend Application Running At**: `http://localhost:3000` (or `http://localhost:5173`)
 
 ---
 
-## 💡 Why Kisanमित्र?
-Government schemes often go underutilized due to complex documentation, language barriers, and lack of awareness. Kisanमित्र bridges this gap by acting as a digital, personalized, and safe companion for every farmer, empowering them to claim what is rightfully theirs.
+### ⚙️ Step 3: Configure Environment Variables
+
+Create `.env` inside the `backend/` directory:
+
+```bash
+# In backend/.env file
+NVIDIA_API_KEY=nvapi-your-nvidia-api-key-here
+```
+
+---
+
+## 🔑 Environment Variables
+
+| Variable Name | Required | Default Value | Description |
+| :--- | :---: | :--- | :--- |
+| `NVIDIA_API_KEY` | **Yes** | `""` | API key from NVIDIA Build platform for LLM & Vision inference. |
+| `GEMINI_API_KEY` | Optional | `""` | Fallback key alternative if configured. |
+
+---
+
+## 🔌 API Endpoints Summary
+
+| Method | Endpoint | Description |
+| :---: | :--- | :--- |
+| `GET` | `/` | Health check endpoint. |
+| `GET` | `/api/schemes` | Returns the list of government schemes from `schemes.json`. |
+| `POST` | `/api/chat` | Streaming SSE endpoint for AI voice/chat assistant responses. |
+| `POST` | `/api/check-fraud` | Analyzes text messages or image screenshots for potential scams. |
+| `POST` | `/api/analyze-document` | Uploads farmer documents (Aadhaar/Land record) to extract profile data and match eligible schemes. |
+| `POST` | `/api/profile` | Saves/syncs farmer profile details. |
+
+---
+
+## 🌐 Deployment Guide
+
+### Deploying on Vercel
+The project includes a ready-to-use `vercel.json` configured for monorepo deployment (FastAPI backend + Vite React frontend).
+
+1. Push your code to GitHub.
+2. Import your repository into [Vercel](https://vercel.com/).
+3. Add the `NVIDIA_API_KEY` environment variable under Vercel Project Settings.
+4. Click **Deploy**.
+
+---
+
+## 🛡️ License
+
+This project is licensed under the **MIT License**. See the `LICENSE` file for details.
+
+---
+
+## 🤝 Acknowledgments & Team
+
+Developed for **Smart India Hackathon (SIH) 2026**. Special thanks to the Ministry of Agriculture & Farmers Welfare, Government of Chhattisgarh, and NVIDIA Developer Network for providing AI model infrastructure.
