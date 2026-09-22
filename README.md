@@ -222,24 +222,43 @@ NVIDIA_API_KEY=nvapi-your-nvidia-api-key-here
 
 ---
 
-## 🌐 Deployment Guide
+## 🌐 Deploying & Hosting on Netlify
 
-### Deploying on Vercel
-The project includes a ready-to-use `vercel.json` configured for monorepo deployment (FastAPI backend + Vite React frontend).
+This project is pre-configured for seamless deployment on **Netlify** using [`netlify.toml`](file:///c:/Users/hkdew/Downloads/NIT-september%202026/NIT-september%202026/netlify.toml) and [`frontend/public/_redirects`](file:///c:/Users/hkdew/Downloads/NIT-september%202026/NIT-september%202026/frontend/public/_redirects).
 
-1. Push your code to GitHub.
-2. Import your repository into [Vercel](https://vercel.com/).
-3. Add the `NVIDIA_API_KEY` environment variable under Vercel Project Settings.
-4. Click **Deploy**.
+### 🚀 Step-by-Step Netlify Deployment Guide
 
----
+#### 1. Import Repository into Netlify
+1. Log in to [Netlify App](https://app.netlify.com/).
+2. Click **Add new site** > **Import an existing project**.
+3. Choose **GitHub** and select your repository: `spider714/kishanMitra`.
 
-## 🛡️ License
+#### 2. Configure Netlify Build Settings
+Netlify will automatically detect the settings from [`netlify.toml`](file:///c:/Users/hkdew/Downloads/NIT-september%202026/NIT-september%202026/netlify.toml). Verify the following:
 
-This project is licensed under the **MIT License**. See the `LICENSE` file for details.
+- **Build command**: `npm run build`
+- **Publish directory**: `frontend/dist`
+- **Node version**: `18` (or higher)
+
+#### 3. Single Page Application (SPA) Routing
+The included [`netlify.toml`](file:///c:/Users/hkdew/Downloads/NIT-september%202026/NIT-september%202026/netlify.toml) and [`_redirects`](file:///c:/Users/hkdew/Downloads/NIT-september%202026/NIT-september%202026/frontend/public/_redirects) automatically redirect all client-side routes (e.g., `/schemes`, `/fraud-shield`, `/document-scanner`) to `index.html`, ensuring refresh on any subpage works without 404 errors.
+
+#### 4. Backend (FastAPI) Hosting
+Deploy the `backend/` folder on [Render](https://render.com/), [Railway](https://railway.app/), or [Vercel](https://vercel.com/):
+1. Create a Python Web Service on Render / Railway pointing to `backend/main.py`.
+2. Add environment variable `NVIDIA_API_KEY=your_key_here` in your backend host settings.
+3. In Netlify, under **Site settings > Build & deploy > Environment variables**, add your backend URL if needed, or uncomment the API proxy rewrite in `netlify.toml`:
+
+```toml
+[[redirects]]
+  from = "/api/*"
+  to = "https://your-backend-api.onrender.com/api/:splat"
+  status = 200
+  force = true
+```
 
 ---
 
 ## 🤝 Acknowledgments & Team
 
-Developed for **Smart India Hackathon (SIH) 2026**. Special thanks to the Ministry of Agriculture & Farmers Welfare, Government of Chhattisgarh, and NVIDIA Developer Network for providing AI model infrastructure.
+Developed for FUTURE READY CHHATTISGARH (AI CAPACITY BUILDING & INNOVATION PROGRAM). Special thanks to BUSSINESS GARH Chhattisgarh, HIRA GROUP RAIPUR for providing AI model infrastructure.

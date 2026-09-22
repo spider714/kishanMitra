@@ -1,0 +1,27 @@
+# ==========================================
+# Netlify Configuration File for Kisanमित्र
+# ==========================================
+
+[build]
+  # Command to install and build the frontend React + Vite application
+  command = "npm run build"
+  
+  # Directory containing the built production static files
+  publish = "frontend/dist"
+
+[build.environment]
+  NODE_VERSION = "18"
+
+# Redirect rules for single-page applications (SPA)
+# Ensures client-side React Router paths (e.g., /schemes, /fraud-shield) don't return 404 on refresh
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Optional: Proxy API requests to your hosted FastAPI backend (e.g. on Render/Railway)
+# [[redirects]]
+#   from = "/api/*"
+#   to = "https://your-backend-api.onrender.com/api/:splat"
+#   status = 200
+#   force = true
