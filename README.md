@@ -226,32 +226,7 @@ NVIDIA_API_KEY=nvapi-your-nvidia-api-key-here
 
 ---
 
-## 🌐 Deploying & Hosting on Netlify
 
-This project is pre-configured for seamless deployment on **Netlify** using [`netlify.toml`](file:///c:/Users/hkdew/Downloads/NIT-september%202026/NIT-september%202026/netlify.toml) and [`frontend/public/_redirects`](file:///c:/Users/hkdew/Downloads/NIT-september%202026/NIT-september%202026/frontend/public/_redirects).
-
-### 🚀 Step-by-Step Netlify Deployment Guide
-
-#### 1. Import Repository into Netlify
-1. Log in to [Netlify App](https://app.netlify.com/).
-2. Click **Add new site** > **Import an existing project**.
-3. Choose **GitHub** and select your repository: `spider714/kishanMitra`.
-
-#### 2. Configure Netlify Build Settings
-Netlify will automatically detect the settings from [`netlify.toml`](file:///c:/Users/hkdew/Downloads/NIT-september%202026/NIT-september%202026/netlify.toml). Verify the following:
-
-- **Build command**: `npm run build`
-- **Publish directory**: `frontend/dist`
-- **Node version**: `18` (or higher)
-
-#### 3. Single Page Application (SPA) Routing
-The included [`netlify.toml`](file:///c:/Users/hkdew/Downloads/NIT-september%202026/NIT-september%202026/netlify.toml) and [`_redirects`](file:///c:/Users/hkdew/Downloads/NIT-september%202026/NIT-september%202026/frontend/public/_redirects) automatically redirect all client-side routes (e.g., `/schemes`, `/fraud-shield`, `/document-scanner`) to `index.html`, ensuring refresh on any subpage works without 404 errors.
-
-#### 4. Backend (FastAPI) Hosting
-Deploy the `backend/` folder on [Render](https://render.com/), [Railway](https://railway.app/), or [Vercel](https://vercel.com/):
-1. Create a Python Web Service on Render / Railway pointing to `backend/main.py`.
-2. Add environment variable `NVIDIA_API_KEY=your_key_here` in your backend host settings.
-3. In Netlify, under **Site settings > Build & deploy > Environment variables**, add your backend URL if needed, or uncomment the API proxy rewrite in `netlify.toml`:
 
 ```toml
 [[redirects]]
